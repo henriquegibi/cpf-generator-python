@@ -51,8 +51,26 @@ def validador_cpf():
 
 
 def gerador_cpf():
+    cpf_gerado = str(randint(100000000, 999999999))
+    reverso = 10
+    total = 0
 
-    return '16899535009'
+    for index in range(19):
+        if index > 8:
+            index -= 9
+
+        total += int(cpf_gerado[index]) * reverso
+
+        reverso -= 1
+        if reverso < 2:
+            reverso = 11
+            d = 11 - (total % 11)
+            if d > 9:
+                d = 0
+            total = 0
+            cpf_gerado += str(d)
+
+    return cpf_gerado # '16899535009'
 
 
 print(validador_cpf())
